@@ -1,26 +1,39 @@
 {
-  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
-    'config:recommended',
-    'group:monorepos',
-    'group:recommended',
-    'helpers:pinGitHubActionDigestsToSemver',
+    "config:best-practices"
+    "config:recommended",
+    "group:monorepos",
+    "group:recommended",
+    "helpers:pinGitHubActionDigestsToSemver",
   ],
-  semanticCommits: 'disabled',
+  semanticCommits: "disabled",
   packageRules: [
     {
-      matchUpdateTypes: [
-        'major',
-        'minor',
-        'patch'
+      // Check for GitHub Actions updates every Sunday morning, grouped into a single PR
+      "matchManagers": [
+        "github-actions"
       ],
-      minimumReleaseAge: '3 days',
+      "groupName": "github-actions",
+      "schedule": [
+        "* 0-8 * * 0"
+      ]
     },
     {
-      "matchPackageNames": [
-        'dev.jonpoulton*',
+      // Most dependencies wait 3 days
+      matchUpdateTypes: [
+        "major",
+        "minor",
+        "patch"
       ],
-      minimumReleaseAge: '0 days',
+      minimumReleaseAge: "3 days",
+    },
+    {
+      // My libraries update same-day
+      "matchPackageNames": [
+        "dev.jonpoulton*",
+      ],
+      minimumReleaseAge: "0 days",
     }
   ]
 }
