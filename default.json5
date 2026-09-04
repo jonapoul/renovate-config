@@ -34,6 +34,32 @@
         "dev.jonpoulton*",
       ],
       minimumReleaseAge: "0 days",
+    },
+    {
+      // AGP versions are often hardcoded in settings.gradle.kts as well as the version catalog, so
+      // force them into the same group as the catalog's "agp" version ref. Listed explicitly
+      // because com.android.* would also swallow com.android.tools:desugar_jdk_libs
+      "matchDepNames": [
+        "com.android.application",
+        "com.android.kotlin.multiplatform.library",
+        "com.android.lint"
+      ],
+      "groupName": "AGP"
+    },
+    {
+      // Same for blueprint, which can also be referenced by artifacts in the catalog
+      "matchDepNames": [
+        "dev.jonpoulton.blueprint*"
+      ],
+      "groupName": "blueprint"
+    },
+    {
+      // Same for Kotlin. Two globs so we catch plugin IDs and artifacts, but not org.jetbrains.kotlinx
+      "matchDepNames": [
+        "org.jetbrains.kotlin.*",
+        "org.jetbrains.kotlin:*"
+      ],
+      "groupName": "kotlin"
     }
   ]
 }
