@@ -20,13 +20,13 @@
       ]
     },
     {
-      // Most dependencies wait 3 days
+      // Most dependencies wait 7 days
       matchUpdateTypes: [
         "major",
         "minor",
         "patch"
       ],
-      minimumReleaseAge: "3 days",
+      minimumReleaseAge: "7 days",
     },
     {
       // My libraries update same-day
